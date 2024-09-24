@@ -1,4 +1,9 @@
-import {ctx, hs} from './main.js'
+import { hs} from './main.js'
+export var mouseX = 0;
+export var mouseY = 0;
+export var mouseClicked = false;
+const canvas = document.getElementById("catan-board");
+const ctx = canvas.getContext("2d");
 export function drawHarbors() {
     const harborLocations = [
       { x: 300, y: 30 }, { x: 450, y: 30 }, { x: 570, y: 130 },
@@ -47,3 +52,15 @@ export function drawHexagon(x, y, fillColor, number) {
         ctx.fillText(number, x, y);
     }
 }
+canvas.addEventListener("mousemove", (e) => {
+  const rect = canvas.getBoundingClientRect();
+  mouseX = e.clientX - rect.left;
+  mouseY = e.clientY - rect.top;
+});
+canvas.addEventListener("mousedown", () => {
+    mouseClicked = true;
+});
+canvas.addEventListener("mouseup", () => {
+    mouseClicked = false;
+});
+
